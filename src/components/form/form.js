@@ -10,36 +10,6 @@ class Form extends React.Component {
     this.sort = this.sort.bind(this);
   }
 
-  render() {
-    return (
-      <div style={{ textAlign: "center" }}>
-        <List items={this.state.items} deleteItem={this.deleteItem} />
-        <form onSubmit={this.handleSubmit}>
-          <label className={"font-weight-bold"} htmlFor="new-todo">
-            enter task
-          </label>
-          <input
-            className={"form-control"}
-            id="new-todo"
-            onChange={this.handleChange}
-            value={this.state.text}
-          />
-          <button
-            disabled={
-              this.state.text.length === 0 || this.state.text.length > 10
-            }
-            className={`${this.getButton()}`}
-          >
-            add task number {this.state.items.length + 1}
-          </button>
-          <button className={"btn btn-dark"} onClick={this.sort}>
-            sort alphabetically
-          </button>
-        </form>
-      </div>
-    );
-  }
-
   getButton = () => {
     if (this.state.text.length > 10 || this.state.text.length == 0) {
       return "btn btn-danger";
@@ -84,6 +54,40 @@ class Form extends React.Component {
       items: prevState.items.concat(newItem),
       text: ""
     }));
+  }
+
+  render() {
+    return (
+      <div style={{ textAlign: "center" }}>
+        <form onSubmit={this.handleSubmit}>
+          <label className={"font-weight-bold"} htmlFor="new-todo">
+            enter task
+          </label>
+          <input
+            className={"form-control"}
+            id="new-todo"
+            onChange={this.handleChange}
+            value={this.state.text}
+          />
+          <button
+            disabled={
+              this.state.text.length === 0 || this.state.text.length > 50
+            }
+            className={`${this.getButton()}`}
+          >
+            add task number {this.state.items.length + 1}
+          </button>
+          <button
+            disabled={this.state.items.length == 0}
+            className={"btn btn-dark"}
+            onClick={this.sort}
+          >
+            sort alphabetically
+          </button>
+        </form>
+        <List items={this.state.items} deleteItem={this.deleteItem} />
+      </div>
+    );
   }
 }
 

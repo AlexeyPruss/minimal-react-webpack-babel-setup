@@ -1,23 +1,50 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 
 class List extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
   handleClick(id) {
     this.props.deleteItem(id);
   }
+
   render() {
+    const listItem = {
+      display: "flex",
+      justifyContent: "space-between",
+      background: "bisque",
+      margin: "25px 0px",
+      padding: "30px 0px"
+    };
     return (
-      <ul>
+      <ul
+        style={{
+          paddingLeft: "0",
+          listStyle: "none"
+        }}
+      >
         {this.props.items.map(item => (
-          <li className={"font-weight-bold"} key={item.id}>
+          <NavLink
+            activeStyle={{ background: "orange" }}
+            style={listItem}
+            to={{
+              pathname: `/list/${item.id}`
+            }}
+            className={"font-weight-bold"}
+            key={item.id}
+          >
             {item.text}
 
             <button
               className={"btn btn-primary"}
-              onClick={this.handleClick.bind(this, item.id)}
+              onClick={() => this.handleClick(item.id)}
             >
               delete
             </button>
-          </li>
+          </NavLink>
         ))}
       </ul>
     );
