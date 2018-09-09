@@ -27,24 +27,26 @@ class List extends React.Component {
         }}
       >
         {this.props.items.map(item => (
-          <NavLink
-            activeStyle={{ background: "orange" }}
-            style={listItem}
-            to={{
-              pathname: `/list/${item.id}`
-            }}
-            className={"font-weight-bold"}
-            key={item.id}
-          >
-            {item.text}
-
+          <div>
+            <NavLink
+              activeStyle={{ background: "orange" }}
+              style={listItem}
+              to={{
+                pathname: `/list/${item.id}`
+              }}
+              className={"font-weight-bold"}
+              key={item.id}
+            >
+              {item.text}
+              <h6>Это задача {item.id}</h6>
+            </NavLink>
             <button
               className={"btn btn-primary"}
               onClick={() => this.handleClick(item.id)}
             >
               delete
             </button>
-          </NavLink>
+          </div>
         ))}
       </ul>
     );

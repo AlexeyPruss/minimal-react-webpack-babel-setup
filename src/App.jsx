@@ -4,6 +4,7 @@ import Menu from "./components/menu";
 import Information from "./components/Information";
 import NotFound from "./components/NotFound";
 import { Route, Switch } from "react-router-dom";
+import Listitem from "./components/Listitem";
 
 const App = () => (
   <section>
@@ -11,7 +12,8 @@ const App = () => (
     <div>
       <Switch>
         <Route exact path="/" component={Information} />
-        <Route path="/list" component={Form} />
+        <Route exact path="/list" component={Form} />
+        <Route path="/list/:id" component={Listitem} />
         <Route component={NotFound} />
       </Switch>
     </div>
